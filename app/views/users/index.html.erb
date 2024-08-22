@@ -18,10 +18,9 @@
 <% @users.each do |user| %>
 
 <p>Image</p>
-
-
+  <%= image_tag  user.get_profile_image(100, 100) %>
 <p>Name</p>
-<%= user.name %>
+  <%= user.name %>
 
 
 <% end %>
