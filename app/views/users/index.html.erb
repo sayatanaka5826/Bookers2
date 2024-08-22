@@ -1,6 +1,15 @@
 <h1>User info</h1>
 
+<% if @user.profile_image.attached? %>
+  <%= image_tag @user.profile_image %>
+<% else %>
+  <%= image_tag 'no_image', size: "100x100" %>
+<% end %>
+<p>name</p>
 <%= @user.name %>
+<p>introduction</p>
+<%= @user.introduction %>
+
 
 <h1>New book</h1>
 
@@ -24,3 +33,4 @@
 
 
 <% end %>
+

@@ -1,3 +1,42 @@
-<p>Books</p>
+<h1>User info</h1>
+
+<% if @user.profile_image.attached? %>
+  <%= image_tag @user.profile_image %>
+<% else %>
+  <%= image_tag 'no_image', size: "100x100" %>
+<% end %>
+
+<p>name</p>
+<%= @user.name %>
+
+<p>introduction</p>
+<%= @user.introduction %>
+
+<%= link_to "編集", edit_user_path(@user) %>
+
+<h1>New book</h1>
+
+<%= form_with model: @book do |f| %>
+<p>Title<p>
+<%= f.text_field :title %>
+
+<p>Opinion<p>
+<%= f.text_area :body %>
+
+<%= f.submit 'Create Book' %>
+<% end %>
+
+<h4>Books</h4>
+<% @books.each do |book| %>
+
+<%= image_tag  @user.get_profile_image(100, 100) %>
+
+<p>Title</p>
+  <%= book.title %>
+
+<p>Opinion</p>
+  <%= book.body %>
+
+<% end %>
 
 
