@@ -1,5 +1,4 @@
 <h1>User info</h1>
-
 <% if @user.profile_image.attached? %>
   <%= image_tag @user.profile_image %>
 <% else %>
@@ -9,6 +8,9 @@
 <%= @user.name %>
 <p>introduction</p>
 <%= @user.introduction %>
+<%= link_to "編集", edit_user_path(@user) %>
+
+
 
 
 <h1>New book</h1>
@@ -23,6 +25,9 @@
 <%= f.submit 'Create Book' %>
 <% end %>
 
+
+
+
 <h4>Users</h4>
 <% @users.each do |user| %>
 
@@ -30,7 +35,5 @@
   <%= image_tag  user.get_profile_image(100, 100) %>
 <p>Name</p>
   <%= user.name %>
-
-
 <% end %>
 
