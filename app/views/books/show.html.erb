@@ -2,29 +2,8 @@
   <%= flash[:notice] %>
 </div>
 
-<h1>User info</h1>
-<%= image_tag @user.get_profile_image(200, 200) %>
-<p>name</p>
-<%= @user.name %>
-<p>introduction</p>
-<%= @user.introduction %>
 
-<% if @user.id == current_user.id %>
-  <%= link_to "編集", edit_user_path(@user) %>
-<% end %>
-
-<h1>New book</h1>
-
-<%= form_with model: @book_new do |f| %>
-<p>Title<p>
-<%= f.text_field :title %>
-
-<p>Opinion<p>
-<%= f.text_area :body %>
-
-<%= f.submit 'Create Book' %>
-<% end %>
-
+<%= render 'book', user: @user, book_new: @book_new%>
 
 
 <h4>Book detail</h4>
@@ -33,12 +12,14 @@
   <%= image_tag @user.get_profile_image(100, 100) %>
 <% else %>
   <%= image_tag 'no_image', size: "100x100" %>
-<% end %>
+<% end %> 
 
-<p><%= @book.title %></p>
+
+
+<%= link_to @user.name, user_path(@user) %>
+<%= link_to @book.title, book_path(@book) %>
 <p><%= @book.body %></p>
-<p><%= @user.name %>
-<%= link_to user_path(@user.id) %>
+
 
 
 <% if @book.user == current_user %>
