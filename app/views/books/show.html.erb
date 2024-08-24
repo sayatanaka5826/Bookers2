@@ -3,21 +3,19 @@
 </div>
 
 <h1>User info</h1>
-<% if @user.image.attached? %>
-  <%= image_tag @user.image %>
-<% else %>
-  <%= image_tag 'no_image', size: "100x100" %>
-<% end %>
+<%= image_tag @user.get_profile_image(200, 200) %>
 <p>name</p>
 <%= @user.name %>
 <p>introduction</p>
 <%= @user.introduction %>
-<%= link_to "編集", edit_user_path(@user) %>
 
+<% if @user.id == current_user.id %>
+  <%= link_to "編集", edit_user_path(@user) %>
+<% end %>
 
 <h1>New book</h1>
 
-<%= form_with model: @book do |f| %>
+<%= form_with model: @book_new do |f| %>
 <p>Title<p>
 <%= f.text_field :title %>
 
@@ -31,8 +29,8 @@
 
 <h4>Book detail</h4>
 
-<% if @user.profile_image.attached? %>
-  <%= image_tag @user.profile_image %>
+<% if @user.image.attached? %>
+  <%= image_tag @user.get_profile_image(100, 100) %>
 <% else %>
   <%= image_tag 'no_image', size: "100x100" %>
 <% end %>
@@ -43,7 +41,11 @@
 <%= link_to user_path(@user.id) %>
 
 
-<%= link_to "Edit", edit_book_path %>
-<%= link_to "Destroy", book_path, method: :delete, "data-confirm" => "本当に消しますか？" %>
+<% if @book.user == current_user %>
+  <%= link_to "Edit", edit_book_path %>
+<% end %>
+<% if @book.user == current_user %>
+  <%= link_to "Destroy", book_path, method: :delete, "data-confirm" => "本当に消しますか？" %>
+<% end %>
 
 
