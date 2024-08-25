@@ -4,10 +4,22 @@
 
 <h1>User info</h1>
 <%= image_tag @user.get_profile_image(200, 200) %>
-<p>name</p>
-<%= @user.name %>
-<p>introduction</p>
-<%= @user.introduction %>
+
+
+<table class="table">
+  <tr>
+    <th>name</th>
+    <td>
+      <%= @user.name %>
+    </td>
+  </tr>
+  <tr>
+    <th>introduction</th>
+    <td>
+      <%= @user.introduction %>
+    </td>
+  </tr>
+</table>
 
 
 <% if @user.id == current_user.id %>
@@ -32,18 +44,36 @@
 
 
 
-
 <h4>Books</h4>
-<% @books.each do |book| %>
 
-<%= image_tag  @user.get_profile_image(100, 100) %>
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="1"></th>
+      <th>Title</th>
+      <th>Opnion</th>
+    </tr>
+  </thead>
 
-<p>Title</p>
- <%= link_to book.title, book_path(book) %>
+  <tbody>
+  <% @books.each do |book| %>
 
-<p>Opinion</p>
-  <%= book.body %>
+    <tr>
+      <td>
+        <%= image_tag  @user.get_profile_image(100, 100) %>
+      </td>
+      <td>
+        <%= link_to book.title, book_path(book) %>
+      </td>
+      <td>
+         <%= book.body %>
+      </td>
+    </tr>
 
-<% end %>
+  <% end %>
+  </tbody>
+
+</table>
+
 
 

@@ -1,9 +1,22 @@
 <h1>User info</h1>
 <%= image_tag user.get_profile_image(200, 200) %>
-<p>name</p>
-<%= user.name %>
-<p>introduction</p>
-<%= user.introduction %>
+
+
+<table class="table">
+  <tr>
+    <th>name</th>
+    <td>
+      <%= user.name %>
+    </td>
+  </tr>
+  <tr>
+    <th>introduction</th>
+    <td>
+      <%= user.introduction %>
+    </td>
+  </tr>
+</table>
+
 
 <% if user.id == current_user.id %>
   <%= link_to  edit_user_path(user), class: 'btn btn-default' do %>
@@ -12,16 +25,25 @@
 <% end %>
 
 
+
+
 <h1>New book</h1>
 
 <%= form_with model: book_new do |f| %>
-<p>Title<p>
-<%= f.text_field :title %>
 
-<p>Opinion<p>
-<%= f.text_area :body %>
+<div>
+  <p>Title<p>
+  <%= f.text_field :title %>
+</div>
 
-<%= f.submit 'Create Book' %>
+<div>
+  <p>Opinion<p>
+  <%= f.text_area :body %>
+</div>
+
+<div><%= f.submit 'Create Book', class: 'btn btn-success' %></div>
+
+
 <% end %>
 
 
