@@ -2,78 +2,87 @@
   <%= flash[:notice] %>
 </div>
 
-<h1>User info</h1>
-<%= image_tag @user.get_profile_image(200, 200) %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3" >
+
+      <h1>User info</h1>
+        <%= image_tag @user.get_profile_image(200, 200) %>
+
+        <table class="table">
+          <tr>
+            <th>name</th>
+              <td>
+                <%= @user.name %>
+              </td>
+            </tr>
+          <tr>
+            <th>introduction</th>
+              <td>
+                <%= @user.introduction %>
+              </td>
+            </tr>
+        </table>
+
+        <% if @user.id == current_user.id %>
+          <%= link_to  edit_user_path(@user), class: "btn btn-outline-dark btn-md" do %>
+            <i class="fa-solid fa-user-pen"></i>
+        <% end %>
+        <% end %>
 
 
-<table class="table">
-  <tr>
-    <th>name</th>
-    <td>
-      <%= @user.name %>
-    </td>
-  </tr>
-  <tr>
-    <th>introduction</th>
-    <td>
-      <%= @user.introduction %>
-    </td>
-  </tr>
-</table>
+      <h1>New book</h1>
+      <%= form_with model: @book do |f| %>
 
+      <div>
+        <p>Title<p>
+        <%= f.text_field :title %>
+      </div>
 
-<% if @user.id == current_user.id %>
-  <%= link_to  edit_user_path(@user), class: 'btn btn-default' do %>
-      <i class="fa-solid fa-user-pen"></i>
-  <% end %>
-<% end %>
+      <div>
+        <p>Opinion<p>
+        <%= f.text_area :body %>
+      </div>
 
+      <div><%= f.submit 'Create Book', class: 'btn btn-success' %></div>
+      <% end %>
 
+    </div>
 
-<h1>New book</h1>
+    <div class="offset-md-1" ></div>
 
-<%= form_with model: @book do |f| %>
-<p>Title<p>
-<%= f.text_field :title %>
+    <div class="col-md-8" >
+      <h1>Books</h1>
 
-<p>Opinion<p>
-<%= f.text_area :body %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th colspan="1"></th>
+              <th>Title</th>
+              <th>Opnion</th>
+            </tr>
+          </thead>
 
-<%= f.submit 'Create Book' %>
-<% end %>
+          <tbody>
+          <% @books.each do |book| %>
 
+            <tr>
+              <td>
+                <%= image_tag  @user.get_profile_image(100, 100) %>
+              </td>
+              <td>
+                <%= link_to book.title, book_path(book) %>
+              </td>
+              <td>
+                <%= book.body %>
+              </td>
+            </tr>
 
-
-<h4>Books</h4>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th colspan="1"></th>
-      <th>Title</th>
-      <th>Opnion</th>
-    </tr>
-  </thead>
-
-  <tbody>
-  <% @books.each do |book| %>
-
-    <tr>
-      <td>
-        <%= image_tag  @user.get_profile_image(100, 100) %>
-      </td>
-      <td>
-        <%= link_to book.title, book_path(book) %>
-      </td>
-      <td>
-         <%= book.body %>
-      </td>
-    </tr>
-
-  <% end %>
-  </tbody>
-
-</table>
-
+          <% end %>
+          </tbody>
+        </table>
+    </div>
+  </div>
+</div>
 
 
