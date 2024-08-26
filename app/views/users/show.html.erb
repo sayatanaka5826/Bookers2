@@ -24,11 +24,10 @@
             </tr>
         </table>
 
-        <% if @user.id == current_user.id %>
-          <%= link_to  edit_user_path(@user), class: "btn btn-outline-dark btn-md" do %>
-            <i class="fa-solid fa-user-pen"></i>
-        <% end %>
-        <% end %>
+
+          <%= link_to  edit_user_path(@user), class: "btn btn-outline-dark btn-block btn-md" do %>
+            <i class="fa-solid fa-user-gear"></i>
+          <% end %>
 
 
       <h1>New book</h1>
@@ -49,9 +48,9 @@
 
     </div>
 
-    <div class="offset-md-1" ></div>
 
-    <div class="col-md-8" >
+
+    <div class="col-md-8 offset-md-1" >
       <h1>Books</h1>
 
         <table class="table">
@@ -68,7 +67,9 @@
 
             <tr>
               <td>
+                <%= link_to user_path(book.user) do %>
                 <%= image_tag  @user.get_profile_image(100, 100) %>
+                <% end %>
               </td>
               <td>
                 <%= link_to book.title, book_path(book) %>

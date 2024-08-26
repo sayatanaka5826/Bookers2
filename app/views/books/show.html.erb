@@ -8,21 +8,23 @@
       <%= render 'book', user: @user, book_new: @book_new%>
     </div>
 
-    <div class="offset-md-1" ></div>
 
-    <div class="col-md-8" >
+
+    <div class="col-md-8 offset-md-1" >
       <h1>Book detail</h1>
 
         <table class="table">
           <tr>
             <td>
-              <% if @user.image.attached? %>
+              <%= link_to user_path(@user) do %>
+              <% if @user.profile_image.attached? %>
                 <%= image_tag @user.get_profile_image(100, 100) %>
               <% else %>
                 <%= image_tag 'no_image', size: "100x100" %>
               <% end %><br>
-
+              <% end %>
               <%= link_to @user.name, user_path(@user) %>
+
             </td>
 
             <td>
